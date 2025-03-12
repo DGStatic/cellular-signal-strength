@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "cellular-signal-strength": ["../src/index"],
+      "cellular-signal-strength/*": ["../src/*"]
+    }
+  }
+}

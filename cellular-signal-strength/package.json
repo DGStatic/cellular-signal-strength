@@ -1,0 +1,43 @@
+{
+  "name": "cellular-signal-strength",
+  "version": "0.1.0",
+  "description": "A module that monitors cellular signal strength",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "xed example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "cellular-signal-strength",
+    "CellularSignalStrength"
+  ],
+  "repository": "https://github.com/DGStatic/cellular-signal-strength",
+  "bugs": {
+    "url": "https://github.com/DGStatic/cellular-signal-strength/issues"
+  },
+  "author": "Dylan Sharp <dgstatic@gmail.com> (https://github.com/DGStatic)",
+  "license": "MIT",
+  "homepage": "https://github.com/DGStatic/cellular-signal-strength#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "~18.3.12",
+    "expo-module-scripts": "^4.0.3",
+    "expo": "~52.0.0",
+    "react-native": "0.76.0"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}
