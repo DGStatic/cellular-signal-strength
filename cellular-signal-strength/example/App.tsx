@@ -18,27 +18,6 @@ export default function App() {
     new CellularSignalStrength()
   );
 
-  const requestPhoneStatePermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
-        {
-          title: "Phone State Permission",
-          message:
-            "This app needs access to your phone state in order to monitor your cellular connection.",
-          buttonPositive: "OK",
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("READ_PHONE_STATE permission granted");
-      } else {
-        console.log("READ_PHONE_STATE permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
   const startReadingSignalStrength = () => {
     try {
       SignalStrength.current.monitorCellularSignalStrength(setSignalStrengthDb);
@@ -52,6 +31,27 @@ export default function App() {
   };
 
   useEffect(() => {
+    const requestPhoneStatePermission = async () => {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
+          {
+            title: "Phone State Permission",
+            message:
+              "This app needs access to your phone state in order to monitor your cellular connection.",
+            buttonPositive: "OK",
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("READ_PHONE_STATE permission granted");
+        } else {
+          console.log("READ_PHONE_STATE permission denied");
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    };
+
     if (Platform.OS === "android") {
       requestPhoneStatePermission();
     }
