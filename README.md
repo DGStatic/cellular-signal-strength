@@ -57,19 +57,19 @@ You must add ACCESS_NETWORK_STATE and READ_PHONE_STATE permissions to your Andro
 ### Using Expo
 
 ```json
-expo: {
-
+{
+  "expo": {
     // ...
 
-    android: {
+    "android": {
+      // ...
 
-        // ...
-
-        permission: [
-            "android.permission.ACCESS_NETWORK_STATE",
-            "android.permission.READ_PHONE_STATE"
-        ]
-    },
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.READ_PHONE_STATE"
+      ]
+    }
+  }
 }
 ```
 
