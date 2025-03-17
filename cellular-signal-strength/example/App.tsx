@@ -1,15 +1,50 @@
 import { CellularSignalStrength } from "cellular-signal-strength";
 import { useEffect, useRef, useState } from "react";
-import { SafeAreaView, Text, TouchableHighlight, View } from "react-native";
+import {
+  PermissionsAndroid,
+  Platform,
+  SafeAreaView,
+  Text,
+  ToastAndroid,
+  TouchableHighlight,
+  View,
+} from "react-native";
 
 export default function App() {
-  const [signalStrengthDb, setSignalStrengthDb] = useState<number | null>(null);
+  const [signalStrengthDb, setSignalStrengthDb] = useState<
+    number | undefined
+  >();
   const SignalStrength = useRef<CellularSignalStrength>(
     new CellularSignalStrength()
   );
 
+  const requestPhoneStatePermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
+        {
+          title: "Phone State Permission",
+          message:
+            "This app needs access to your phone state in order to monitor your cellular connection.",
+          buttonPositive: "OK",
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("READ_PHONE_STATE permission granted");
+      } else {
+        console.log("READ_PHONE_STATE permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   const startReadingSignalStrength = () => {
-    SignalStrength.current.monitorCellularSignalStrength(setSignalStrengthDb);
+    try {
+      SignalStrength.current.monitorCellularSignalStrength(setSignalStrengthDb);
+    } catch (err) {
+      ToastAndroid.show((err as Error).message, ToastAndroid.LONG);
+    }
   };
 
   const stopReadingSignalStrength = () => {
@@ -17,6 +52,10 @@ export default function App() {
   };
 
   useEffect(() => {
+    if (Platform.OS === "android") {
+      requestPhoneStatePermission();
+    }
+
     return () => {
       SignalStrength.current.stopMonitoringCellularSignalStrength();
     };
@@ -38,7 +77,7 @@ export default function App() {
           <Text>Stop Reading</Text>
         </TouchableHighlight>
         <Text>Signal Strength:</Text>
-        <Text>{signalStrengthDb} dB</Text>
+        <Text>{signalStrengthDb ? `${signalStrengthDb} dB` : `Unknown`}</Text>
       </View>
     </SafeAreaView>
   );

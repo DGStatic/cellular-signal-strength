@@ -1,10 +1,9 @@
 import CellularSignalStrengthModule from "./CellularSignalStrengthModule";
 
-const UPDATE_INTERVAL = 1_000;
+const UPDATE_INTERVAL = 500;
 
 export class CellularSignalStrength {
   private _intervalId: number | null;
-  private signalStrength?: number;
 
   /**
    * Creates a cellular signal strength object
@@ -34,26 +33,28 @@ export class CellularSignalStrength {
   /**
    * Starts monitoring cellular signal strength. Checks for updates every second, by default, then calls the listener if there is an update.
    *
-   * @param listener Callback that receives an updated celluler signal strength value in decibels (dB).
-   * @param {number} updateInterval Amount of milliseconds to wait between checking for updates. Minimum value is 1000, as signal strength does not usually update fast enough for values lower than that to be effective.
+   * @param listener Callback that receives an updated cellular signal strength value in decibels (dB).
+   * @param {number} updateInterval Amount of milliseconds to wait between checking for updates. Minimum value is 500, as signal strength does not usually update fast enough for values lower than that to be effective.
+   * @throws If the READ_PHONE_STATE permission is denied or mobile data is not turned on, an error will be thrown.
    */
   public monitorCellularSignalStrength = (
-    listener: (signalStrength: number) => void,
+    listener: (signalStrength?: number) => void,
     updateInterval?: number
   ) => {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
-    CellularSignalStrengthModule.startListeningToSignalStrength();
+    try {
+      CellularSignalStrengthModule.startListeningToSignalStrength()
+    } catch (e) {
+      const message = (e as Error).message.split("Exception: ")[1]
+      throw new Error(message)
+    }
     this.intervalId = setInterval(
       () => {
         const newSignalStrength = this.getSignalStrength();
-        if (!newSignalStrength) return;
-        if (this.signalStrength !== newSignalStrength) {
-          this.signalStrength = newSignalStrength;
-          listener(newSignalStrength);
-        }
+        listener(newSignalStrength);
       },
       !updateInterval || updateInterval < UPDATE_INTERVAL
         ? UPDATE_INTERVAL

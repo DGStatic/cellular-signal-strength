@@ -41,3 +41,6 @@ android {
     abortOnError false
   }
 }
+dependencies {
+    implementation 'androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7'
+}
