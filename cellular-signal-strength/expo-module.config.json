@@ -1,14 +1,5 @@
 {
-  "platforms": [
-    "apple",
-    "android",
-    "web"
-  ],
-  "apple": {
-    "modules": [
-      "CellularSignalStrengthModule"
-    ]
-  },
+  "platforms": ["android"],
   "android": {
     "modules": [
       "expo.modules.cellularsignalstrength.CellularSignalStrengthModule"
