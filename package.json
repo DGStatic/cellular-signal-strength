@@ -1,6 +1,6 @@
 {
   "name": "cellular-signal-strength",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A module that monitors cellular signal strength",
   "main": "build/index.js",
   "types": "build/index.d.ts",
