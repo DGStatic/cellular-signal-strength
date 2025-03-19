@@ -26,17 +26,14 @@ export class CellularSignalStrength {
    *
    * @param listener Callback that receives an updated cellular signal strength value in decibels (dB).
    * @param {number} updateInterval Amount of milliseconds to wait between checking for updates. Minimum value is 500, as signal strength does not usually update fast enough for values lower than that to be effective.
+   * @throws If used on iOS, an error will be thrown.
    * @throws If the READ_PHONE_STATE permission is denied or mobile data is not turned on, an error will be thrown.
    */
   public monitorCellularSignalStrength = (
     listener: (signalStrength?: number) => void,
     updateInterval?: number
   ) => {
-    try {
-      this.checkPlatform();
-    } catch (e) {
-      console.warn((e as Error).message);
-    }
+    this.checkPlatform();
 
     if (this.intervalId) {
       clearInterval(this.intervalId);
@@ -61,13 +58,11 @@ export class CellularSignalStrength {
 
   /**
    * Stop monitoring cellular signal strength.
+   *
+   * @throws If used on iOS, it will throw an error.
    */
   public stopMonitoringCellularSignalStrength = () => {
-    try {
-      this.checkPlatform();
-    } catch (e) {
-      console.warn((e as Error).message);
-    }
+    this.checkPlatform();
 
     if (!this.intervalId) return;
     CellularSignalStrengthModule.stopListeningToSignalStrength();
