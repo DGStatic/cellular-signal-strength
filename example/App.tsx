@@ -23,11 +23,15 @@ export default function App() {
       SignalStrength.current.monitorCellularSignalStrength(setSignalStrengthDb);
     } catch (err) {
       ToastAndroid.show((err as Error).message, ToastAndroid.LONG);
+      console.warn((err as Error).message)
     }
   };
 
   const stopReadingSignalStrength = () => {
-    SignalStrength.current.stopMonitoringCellularSignalStrength();
+    try {SignalStrength.current.stopMonitoringCellularSignalStrength();} catch (err) {
+      console.warn((err as Error).message)
+    }
+    
   };
 
   useEffect(() => {
@@ -57,7 +61,7 @@ export default function App() {
     }
 
     return () => {
-      SignalStrength.current.stopMonitoringCellularSignalStrength();
+      stopReadingSignalStrength()
     };
   }, []);
 

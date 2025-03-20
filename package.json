@@ -1,7 +1,7 @@
 {
   "name": "cellular-signal-strength",
-  "version": "0.1.1",
-  "description": "A module that monitors cellular signal strength",
+  "version": "0.1.2",
+  "description": "Module for reading cellular signal strength",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -12,6 +12,7 @@
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
+    "open:ios": "xed example/ios",
     "open:android": "open -a \"Android Studio\" example/android"
   },
   "keywords": [

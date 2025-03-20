@@ -12,6 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "expo.modules.cellularsignalstrength.example",
+      "appleTeamId": "BXLHQ49TMW"
+    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
