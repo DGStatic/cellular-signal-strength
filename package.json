@@ -28,11 +28,10 @@
   "author": "Dylan Sharp <dgstatic@gmail.com> (https://github.com/DGStatic)",
   "license": "MIT",
   "homepage": "https://github.com/DGStatic/cellular-signal-strength#readme",
-  "dependencies": {},
   "devDependencies": {
     "@types/react": "~18.3.12",
-    "expo-module-scripts": "^4.0.3",
     "expo": "~52.0.0",
+    "expo-module-scripts": "^4.0.3",
     "react-native": "0.76.0"
   },
   "peerDependencies": {
