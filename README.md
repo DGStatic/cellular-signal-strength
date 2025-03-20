@@ -1,6 +1,10 @@
 # cellular-signal-strength
 
-A React Native module for monitoring cellular signal strength. This module is for **Android** only.
+A React Native module for monitoring cellular signal strength.
+
+## Compatbility
+
+This module is for **Android** only, and it requires minimum SDK level of **31**. It won't crash your iOS app by existing, but it will throw errors when you use its features.
 
 ## Installation
 
@@ -34,8 +38,7 @@ try {
 }
 
 // ...
-
-SignalStrength.stopMonitoringSignalStrength();
+SignalStrength.stopMonitoringSignalStrength(); // Use a try-catch if you use it on iOS
 ```
 
 Make sure to stop monitoring when your app closes
@@ -45,7 +48,7 @@ useEffect(() => {
   // ...
 
   return () => {
-    SignalStrength.current.stopMonitoringCellularSignalStrength();
+    SignalStrength.stopMonitoringSignalStrength();
   };
 }, []);
 ```
